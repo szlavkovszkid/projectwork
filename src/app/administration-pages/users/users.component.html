@@ -1,0 +1,67 @@
+<div class="row w-25">
+    <div class="col my-5 fw-bold">
+        Keresés:
+        <input [(ngModel)]="keresendo" type="text"  class="button-94">
+    </div>
+</div>
+
+  <div class="containersecond">
+    <div class="screensecond">
+      <div class="screen__contentsecond">
+        <div class="div" >
+          <div class="row">
+            <div class="col fw fw-bold text-center " (click)="rendez(oszlop)" *ngFor="let oszlop of oszlopok">
+              {{oszlop.text}}
+              <ng-container *ngIf="oszlop==rendezOszlop" >
+                <i *ngIf="rendezIrany==2" class="bi bi-arrow-down"></i>
+                <i *ngIf="rendezIrany==3" class="bi bi-arrow-up"></i>
+                
+            </ng-container>
+            </div>
+            <div class="col fw-bold text-center">Műveletek</div>
+          </div>
+        </div>
+        <div class="loginsecond" *ngFor="let felhasznalok of (users|partnerfilter:keresendo)|partnersort:rendezOszlop:rendezIrany "> 
+          <div   class="login__fieldsecond">
+                <span  class="card-title fw-bold"[id]="felhasznalok.displayName" >Név</span>
+                <input [name]="felhasznalok.displayName" [(ngModel)]="felhasznalok.displayName" type="text"  class="login__inputsecond" >
+          </div>
+          <div   class="login__fieldsecond">
+                <span  class="card-title fw-bold"[id]="felhasznalok.email" >E-mail</span> 
+                <input  [name]="felhasznalok.email" [(ngModel)]="felhasznalok.email" type="email"  class="login__inputsecond" > 
+          </div>
+          <div class="login__fieldsecond">
+            <div class="form-check form-switch">
+                <input [(ngModel)]="felhasznalok.claims.superAdmin" class="form-check-input" type="checkbox"  checked>
+                <label class="form-check-label" for="flexSwitchCheckChecked">Super Admin</label>
+              </div>
+              <div class="form-check form-switch">
+                <input [(ngModel)]="felhasznalok.claims.admin" class="form-check-input" type="checkbox"  checked>
+                <label class="form-check-label" for="flexSwitchCheckChecked">Admin</label>
+              </div>
+              <div class="form-check form-switch">
+                <input [(ngModel)]="felhasznalok.claims.felhasznalo" class="form-check-input" type="checkbox"  checked>
+                <label class="form-check-label" for="flexSwitchCheckChecked">Felhasznalo</label>
+              </div>
+        </div>
+          <button   type="button" class="button-94" (click)="save(felhasznalok)" >Mentés</button>			
+        </div>
+        <div class="social-login">
+            <div class="mb-3">
+              <button routerLink="/dimensions" type="button" class="button-93">Dimenziók</button>
+          </div>
+          <div class="mb-3">
+              <button routerLink="/partners" type="button" class="button-93">Partnerek</button>
+          </div>
+            
+  </div>
+      </div>
+      <div class="screen__background">
+        <span class="screen__background__shape screen__background__shape4second"></span>
+        <span class="screen__background__shape screen__background__shape3second"></span>		
+        <span class="screen__background__shape screen__background__shape2second"></span>
+        <span class="screen__background__shape screen__background__shape1second"></span>
+        <span class="screen__background__shape screen__background__shape1second"></span>
+      </div>		
+    </div>
+  </div>

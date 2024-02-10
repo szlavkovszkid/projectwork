@@ -1,0 +1,175 @@
+<div class="row w-25">
+  <div class="col my-5 fw-bold">
+      Keresés:
+      <input [(ngModel)]="keresendo" type="text"  class="button-94">
+  </div>
+</div>
+<p class="fw-bold">Rendezés</p>
+<div class="row button-94">
+  <div class="col fw-bold text-center " (click)="rendez(oszlop)" *ngFor="let oszlop of ticketoszlopok">
+    <span class="cursor">{{oszlop.text}}</span>
+    <ng-container *ngIf="oszlop==rendezOszlop" >
+      <i *ngIf="rendezIrany==2" class="bi bi-arrow-down"></i>
+      <i *ngIf="rendezIrany==3" class="bi bi-arrow-up"></i>
+      
+  </ng-container>
+  </div>
+</div>
+
+<div class="div">
+  <button class="button-94" *ngFor="let lista of statuskategory;let i=index" [ngClass]="lista==aktivKategoria?'active':''" (click)="show(lista)">{{lista.text}}</button>
+</div>
+
+ <!--  <div class="div d-flex">
+<div class="containersecond"*ngFor="let ticket of (aktivetickets|partnerfilter:keresendo)|partnersort:rendezOszlop:rendezIrany ">
+  <div class="screensecond">
+    <div class="screen__contentsecond">
+      <div class="loginsecond">
+       
+          <div [ngSwitch]="oszlop.key" *ngFor="let oszlop of ticketoszlopok" class="login__fieldsecond">
+            <input *ngSwitchCase="'partner'" disabled="" [name]="ticket.key" [(ngModel)]="ticket[oszlop.key]" [type]="oszlop.type"  class="login__inputsecond" >
+           <input *ngSwitchCase="'industry'" disabled=""  [name]="ticket.key" [(ngModel)]="ticket[oszlop.key]" [type]="oszlop.type"  class="login__inputsecond">
+           <input *ngSwitchCase="'build'" disabled=""  [name]="ticket.key" [(ngModel)]="ticket[oszlop.key]" [type]="oszlop.type"  class="login__inputsecond">
+           <input *ngSwitchCase="'area'" disabled=""  [name]="ticket.key" [(ngModel)]="ticket[oszlop.key]" [type]="oszlop.type"  class="login__inputsecond">
+           <input *ngSwitchCase="'orderType'" disabled=""  [name]="ticket.key" [(ngModel)]="ticket[oszlop.key]" [type]="oszlop.type"  class="login__inputsecond">
+           <input *ngSwitchCase="'netto'" disabled=""  [name]="ticket.key" [(ngModel)]="ticket[oszlop.key]" [type]="oszlop.type"  class="login__inputsecond">
+           <input *ngSwitchCase="'brutto'" disabled=""  [name]="ticket.key" [(ngModel)]="ticket[oszlop.key]" [type]="oszlop.type"  class="login__inputsecond">
+           <textarea *ngSwitchCase="'subjectField'" disabled=""  [name]="ticket.key" [(ngModel)]="ticket[oszlop.key]"  class="login__inputsecond"></textarea>
+           <input *ngSwitchCase="'attachment'" disabled=""  [name]="ticket.key" [(ngModel)]="ticket[oszlop.key]" [type]="oszlop.type"  class="login__inputsecond">
+           <input *ngSwitchCase="'createUser'" disabled=""  [name]="ticket.key" [(ngModel)]="ticket[oszlop.key]" [type]="oszlop.type"  class="login__inputsecond">
+           <input *ngSwitchCase="'createDate'" disabled=""  [name]="ticket.key" [(ngModel)]="ticket[oszlop.key]" [type]="oszlop.type"  class="login__inputsecond">
+           <ng-container *ngIf="!user.claims.felhasznalo">
+           <select *ngSwitchCase="'status'"  [(ngModel)]="ticket.status"  class="form-control text-center" (change)="seletStatus($event)">
+            <option  *ngFor="let allapot of status">
+               {{allapot.text}}
+            </option>       
+              </select>
+              </ng-container>
+           <input *ngSwitchCase="'statusDate'" disabled=""  [name]="ticket.key" [(ngModel)]="ticket[oszlop.key]" [type]="oszlop.type"  class="login__inputsecond">
+           <input *ngSwitchCase="'statusConfiguser'" disabled=""  [name]="ticket.key" [(ngModel)]="ticket[oszlop.key]" [type]="oszlop.type"  class="login__inputsecond">
+        </div>
+
+        
+        
+      </div>
+      <div class="social-loginsecond" >
+        <button  class="button-94" (click)="updateticket(ticket)">Státusz módosítása</button>
+      </div>
+    </div>
+    <div class="screen__background">
+      <span class="screen__background__shape screen__background__shape4second"></span>
+      <span class="screen__background__shape screen__background__shape3second"></span>		
+      <span class="screen__background__shape screen__background__shape2second"></span>
+      <span class="screen__background__shape screen__background__shape1second"></span>
+      <span class="screen__background__shape screen__background__shape1second"></span>
+    </div>		
+  </div>
+</div>
+</div>
+
+ -->
+
+
+
+
+  <div class="container my-3" *ngFor="let ticket of (aktivetickets|partnerfilter:keresendo)|partnersort:rendezOszlop:rendezIrany ">
+    <div class="screen">
+      <div class="screen__content">
+        <div class="login d-flex">
+          <div class="card-header d-flex justify-content-between flex-wrap mx-5">
+            <h5 class="button-94 mb-2">Partner:{{ticket.partner}}</h5>
+            <p class="button-94 mb-2 ">Létrehozó:{{ticket.createUser}}</p>
+            <h5 class="button-94 mb-2">Létrehozás Dátuma:{{ticket.createDate}}</h5>
+            <p class="button-94 mb-2" >Státusz dátum:{{ticket.statusDate}}</p>
+            <p class="button-94 mb-2" >Státusz beállító:{{ticket.statusConfiguser}}</p>            
+           <div class="d-flex" >
+            
+            <input disabled="true" *ngIf="user.claims.felhasznalo" [(ngModel)]="ticket.status"  class="form-control text-center">
+            </div>
+        </div>
+        <div class="card-body d-flex justify-content-between flex-wrap mx-5">
+            <div class="div">
+              
+                <h5 class="button-94 mb-2">Üzletág:{{ticket.industry}}</h5>
+                <h5 class="button-94 mb-2">Épület:{{ticket.build}}</h5>
+                <h5 class="button-94 mb-2">Terület:{{ticket.area}}</h5>
+                <h5 class="button-94 mb-2">Típus:{{ticket.orderType}}</h5>
+            </div>
+        </div>
+        <div class="card-body d-flex justify-content-between flex-wrap mx-5">
+          <div class="div">
+              <h5 class="button-94 mb-2">Nettó:{{ticket.netto}}</h5>
+              <h5 class="button-94 mb-2">Bruttó:{{ticket.brutto}}</h5>
+              <textarea class="button-94 mb-2">Leírás:{{ticket.subjectField}}</textarea>
+              <h5 class="button-94 mb-2">Csatolmány:{{ticket.attachment}}</h5>
+              </div>
+          <div class="card-body d-flex justify-content-between flex-wrap mx-5">
+       </div>
+      </div>
+        </div>
+        <div class="social-login" >
+          <h5 class="button-94 mb-2 mx-1">Státusz:</h5>
+            <select *ngIf="!user.claims.felhasznalo" [(ngModel)]="ticket.status"  class="button-94 mb-2" (change)="seletStatus($event)">
+                <option *ngFor="let allapot of status">
+                   {{allapot.text}}
+                </option>       
+            </select>
+          <button  class="button login__submit" (click)="updateticket(ticket)">Státusz módosítása</button>
+          
+        </div>
+      </div>
+      <div class="screen__background">
+        <span class="screen__background__shape screen__background__shape4"></span>
+        <span class="screen__background__shape screen__background__shape3"></span>		
+        <span class="screen__background__shape screen__background__shape2"></span>
+        <span class="screen__background__shape screen__background__shape1"></span>
+        <span class="screen__background__shape screen__background__shape1"></span>
+      </div>		
+    </div>
+  </div>
+
+
+
+
+
+<!-- 
+    <div  class="card text-center" *ngFor="let ticket of aktivetickets">
+        <ng-container >
+        <div class="card-header d-flex justify-content-between flex-wrap my-3">
+            <h5 class="card-title mt-1">Partner:{{ticket.partner}}</h5>
+            <h5 class="card-title mt-1">Létrehozás Dátuma:{{ticket.createDate}}</h5>
+            <h5 class="card-title mt-1">Létrehozó:{{ticket.createUser}}</h5>
+        <div class="d-flex" >
+            <h5 class="card-title mt-1">Státusz:</h5>
+            <select *ngIf="!user.claims.felhasznalo" [(ngModel)]="ticket.status"  class="form-control text-center" (change)="seletStatus($event)">
+                <option *ngFor="let allapot of status">
+                   {{allapot.text}}
+                </option>       
+            </select>
+            <input disabled="true" *ngIf="user.claims.felhasznalo" [(ngModel)]="ticket.status"  class="form-control text-center">
+            </div>
+        </div>
+        <div class="card-body d-flex justify-content-between flex-wrap">
+            <div class="div">
+                
+                <h5 class="card-title">Üzletág:{{ticket.industry}}</h5>
+                <h5 class="card-title">Épület:{{ticket.build}}</h5>
+                <h5 class="card-title">Terület:{{ticket.area}}</h5>
+                <h5 class="card-title">Típus:{{ticket.orderType}}</h5>
+            </div>
+            <div class="div">
+                <h5 class="card-title">Nettó:{{ticket.netto}}</h5>
+                <h5 class="card-title">Bruttó:{{ticket.brutto}}</h5>
+                </div>
+            <div class="div">
+                <h5 class="card-title">Leírás:{{ticket.subjectField}}</h5>
+                <h5 class="card-title">Csatolmány:{{ticket.attachment}}</h5>
+                <input  type="date"  disabled [(ngModel)]="ticket.statusDate">
+                <input  disabled  [(ngModel)]="ticket.statusConfiguser" type="text">
+            </div>
+        </div>
+        <div class="card-footer text-muted d-flex justify-content-between">
+            <button (click)="updateticket(ticket)">Ticket módosítása</button>
+        </div>
+    </ng-container>
+      </div> -->

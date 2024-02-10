@@ -1,0 +1,82 @@
+<div class="container">
+    <div class="screen">
+      <div class="screen__content">
+        <div class="login">
+          <div [ngSwitch]="oszlop.key" *ngFor="let oszlop of partneroszlop" class="login__field">
+            <span class="card-title fw-bold" [id]="oszlop.key">{{oszlop.text}}</span>
+
+            <input *ngSwitchCase="'partner'" name="partner" [(ngModel)]="newpartner[oszlop.key]" [type]="oszlop.type"  class="login__input" >
+             <input *ngSwitchCase="'taxnumber'" name="taxnumber" [(ngModel)]="newpartner[oszlop.key]" [type]="oszlop.type"  class="login__input" >
+             <input *ngSwitchCase="'email'" name="email" [(ngModel)]="newpartner[oszlop.key]" [type]="oszlop.type"  class="login__input" >
+             <input *ngSwitchCase="'address'" name="address" [(ngModel)]="newpartner[oszlop.key]" [type]="oszlop.type"  class="login__input">
+          </div>
+          <button (click)="addPartner()" class="button login__submit">
+            <span  class="button__text ">Új partner</span>
+            <i class="button__icon fas fa-chevron-right"></i>
+          </button>				
+        </div>
+        <div class="social-login">
+                  <div class="mb-3">
+                    <button routerLink="/dimensions" type="button" class="button-93">Dimenziók</button>
+                </div>
+                <div class="mb-3">
+                    <button routerLink="/users" type="button" class="button-93">Felhasználók</button>
+                </div>
+                  
+        </div>
+      </div>
+      <div class="screen__background">
+        <span class="screen__background__shape screen__background__shape4"></span>
+        <span class="screen__background__shape screen__background__shape3"></span>		
+        <span class="screen__background__shape screen__background__shape2"></span>
+        <span class="screen__background__shape screen__background__shape1"></span>
+        <span class="screen__background__shape screen__background__shape1"></span>
+      </div>		
+    </div>
+  </div>
+
+  <div class="row w-25">
+    <div class="col my-5 fw-bold">
+        Keresés:
+        <input [(ngModel)]="keresendo" type="text"  class="button-94">
+    </div>
+</div>
+
+  <div class="containersecond">
+    <div class="screensecond">
+      <div class="screen__contentsecond">
+        <div class="div" >
+          <div class="row">
+            <div class="col fw fw-bold text-center " (click)="rendez(oszlop)" *ngFor="let oszlop of partneroszlop">
+              {{oszlop.text}}
+              <ng-container *ngIf="oszlop==rendezOszlop" >
+                <i *ngIf="rendezIrany==2" class="bi bi-arrow-down"></i>
+                <i *ngIf="rendezIrany==3" class="bi bi-arrow-up"></i>
+                
+            </ng-container>
+            </div>
+            <div class="col fw-bold text-center">Műveletek</div>
+          </div>
+        </div>
+        <div class="loginsecond" *ngFor="let partner of (partners|partnerfilter:keresendo)|partnersort:rendezOszlop:rendezIrany "> 
+          <div [ngSwitch]="oszlop.key" *ngFor="let oszlop of partneroszlop" class="login__fieldsecond">
+            <input *ngSwitchCase="'partner'" name="partner" [(ngModel)]="partner[oszlop.key]" [type]="oszlop.type"  class="login__inputsecond" >
+             <input *ngSwitchCase="'taxnumber'" name="taxnumber" [(ngModel)]="partner[oszlop.key]" [type]="oszlop.type"  class="login__inputsecond" >
+             <input *ngSwitchCase="'email'" name="email" [(ngModel)]="partner[oszlop.key]" [type]="oszlop.type"  class="login__inputsecond" >
+             <input *ngSwitchCase="'address'" name="address" [(ngModel)]="partner[oszlop.key]" [type]="oszlop.type"  class="login__inputsecond">
+          </div>
+          <button  type="button" class="button-94" (click)="updatePartner(partner)" >Módosít</button>
+          <button   type="button" class="button-94" (click)="deletePartner(partner)" >Töröl</button>			
+        </div>
+      </div>
+      <div class="screen__background">
+        <span class="screen__background__shape screen__background__shape4second"></span>
+        <span class="screen__background__shape screen__background__shape3second"></span>		
+        <span class="screen__background__shape screen__background__shape2second"></span>
+        <span class="screen__background__shape screen__background__shape1second"></span>
+        <span class="screen__background__shape screen__background__shape1second"></span>
+      </div>		
+    </div>
+  </div>
+
+

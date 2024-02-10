@@ -1,0 +1,45 @@
+<div class="container" *ngIf="users">
+    <div class="screen">
+      <div class="screen__content">
+        <div class="login" *ngFor="let user of userloggin">
+          <div  class="login__field" >
+                <span  class="card-title fw-bold" [id]="user.displayName" >Név</span>
+                <select  [name]="user.displayName"  [(ngModel)]="user.displayName"  class="login__input">
+                  <option selected></option>
+                  <option *ngFor="let felhasznalo of accountable">
+                      {{felhasznalo.dimensionName}}
+                  </option>
+              </select>
+                <span  class="card-title fw-bold"[id]="user.email" >E-mail</span>
+                <input disabled="" [name]="user.email"  type="email"  [(ngModel)]="user.email" class="login__input">
+          </div>
+          <button (click)="saveDisplayname(user)" class="button login__submit">
+            <span  class="button__text ">Profil mentése</span>
+            <i class="button__icon fas fa-chevron-right"></i>
+          </button>				
+        </div>
+        <div class="social-login">
+                  <div class="mb-3">
+                       <button routerLink="/newticket" type="button" class="button-93">Új Ticket</button>
+                  </div>
+                  <div class="mb-3">
+                      <button routerLink="/tickets" type="button" class="button-93">Ticketek</button>
+                  </div>
+                  <div class="mb-3">
+                    <button routerLink="/statements" type="button" class="button-92">Kimutatások</button>
+                </div>
+                <div class="mb-3">
+                    <button routerLink="/instructions" type="button" class="button-91">Instrukciók</button>
+                </div>
+                  
+        </div>
+      </div>
+      <div class="screen__background">
+        <span class="screen__background__shape screen__background__shape4"></span>
+        <span class="screen__background__shape screen__background__shape3"></span>		
+        <span class="screen__background__shape screen__background__shape2"></span>
+        <span class="screen__background__shape screen__background__shape1"></span>
+              <span class="screen__background__shape screen__background__shape1"></span>
+      </div>		
+    </div>
+  </div>

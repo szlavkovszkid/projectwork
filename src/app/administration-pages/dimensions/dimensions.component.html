@@ -1,0 +1,424 @@
+   
+
+<ng-container *ngIf="aktivKategoria==0">
+
+
+    <div class="container">
+        <div class="screen">
+          <div class="screen__content">
+            <div class="login">
+              <div [ngSwitch]="oszlop.key" *ngFor="let oszlop of oszlopok" class="login__field">
+                <span class="card-title fw-bold" [id]="oszlop.key">{{oszlop.text}}</span>
+    
+                <input *ngSwitchCase="'dimensionName'" name="dimensionName" [(ngModel)]="newindustry[oszlop.key]" [type]="oszlop.type"  class="login__input" >
+                 <input *ngSwitchCase="'dimensionCode'" name="dimensionCode" [(ngModel)]="newindustry[oszlop.key]" [type]="oszlop.type"  class="login__input" >
+              </div>
+              <button (click)="addIndustry()" class="button login__submit">
+                <span  class="button__text ">Új üzletág</span>
+                <i class="button__icon fas fa-chevron-right"></i>
+              </button>				
+            </div>
+            <div class="social-login" >
+                      <div class="mb-3" *ngFor="let lista of category;let i=index" [ngClass]="i==aktivKategoria?'active':''">
+                          <button (click)="show(i)" (ngModel)="lista.text" type="button" class="button-91">{{lista.text}}</button>
+                      </div>
+                      <div class="mb-3">
+                        <button routerLink="/partners" type="button" class="button-93">Partnerek</button>
+                        </div>
+                        <div class="mb-3">
+                      <button routerLink="/users" type="button" class="button-93">Felhasználók</button>
+                        </div>          
+            </div>
+          </div>
+          <div class="screen__background">
+            <span class="screen__background__shape screen__background__shape4"></span>
+            <span class="screen__background__shape screen__background__shape3"></span>		
+            <span class="screen__background__shape screen__background__shape2"></span>
+            <span class="screen__background__shape screen__background__shape1"></span>
+            <span class="screen__background__shape screen__background__shape1"></span>
+          </div>		
+        </div>
+      </div>
+    
+      <div class="row w-25">
+        <div class="col my-5 fw-bold">
+            Keresés:
+            <input [(ngModel)]="keresendo" type="text"  class="button-94">
+        </div>
+    </div>    
+    
+      <div class="containersecond">
+        <div class="screensecond">
+          <div class="screen__contentsecond">
+            <div class="div" >
+              <div class="row">
+                <div class="col fw-bold text-center " (click)="rendez(oszlop)" *ngFor="let oszlop of oszlopok">
+                  {{oszlop.text}}
+                  <ng-container *ngIf="oszlop==rendezOszlop" >
+                    <i *ngIf="rendezIrany==2" class="bi bi-arrow-down"></i>
+                    <i *ngIf="rendezIrany==3" class="bi bi-arrow-up"></i>
+                    
+                </ng-container>
+                </div>
+                <div class="col fw-bold text-center">Műveletek</div>
+              </div>
+            </div>
+            <div class="loginsecond" *ngFor="let uzletag of (industry|partnerfilter:keresendo)|partnersort:rendezOszlop:rendezIrany "> 
+              <div [ngSwitch]="oszlop.key" *ngFor="let oszlop of oszlopok" class="login__fieldsecond">
+                <input *ngSwitchCase="'dimensionName'" [name]="uzletag.dimensionCode" [(ngModel)]="uzletag [oszlop.key]" [type]="oszlop.type"  class="login__inputsecond" >
+                 <input *ngSwitchCase="'dimensionCode'" [name]="uzletag.dimensionName" [(ngModel)]="uzletag[oszlop.key]" [type]="oszlop.type"  class="login__inputsecond" >
+                
+              </div>
+              <button  type="button" class="button-94" (click)="updateIndustry(uzletag)" >Módosít</button>
+              <button   type="button" class="button-94" (click)="deleteIndustry(uzletag)" >Töröl</button>			
+            </div>
+          </div>
+          <div class="screen__background">
+            <span class="screen__background__shape screen__background__shape4second"></span>
+            <span class="screen__background__shape screen__background__shape3second"></span>		
+            <span class="screen__background__shape screen__background__shape2second"></span>
+            <span class="screen__background__shape screen__background__shape1second"></span>
+            <span class="screen__background__shape screen__background__shape1second"></span>
+          </div>		
+        </div>
+      </div>
+
+</ng-container>
+    
+<ng-container *ngIf="aktivKategoria==1">
+
+    <div class="container">
+        <div class="screen">
+          <div class="screen__content">
+            <div class="login">
+              <div [ngSwitch]="oszlop.key" *ngFor="let oszlop of oszlopok" class="login__field">
+                <span class="card-title fw-bold" [id]="oszlop.key">{{oszlop.text}}</span>
+    
+                <input *ngSwitchCase="'dimensionName'" name="dimensionName" [(ngModel)]="newbuild[oszlop.key]" [type]="oszlop.type"  class="login__input" >
+                 <input *ngSwitchCase="'dimensionCode'" name="dimensionCode" [(ngModel)]="newbuild[oszlop.key]" [type]="oszlop.type"  class="login__input" >
+              </div>
+              <button (click)="addBuild()" class="button login__submit">
+                <span  class="button__text ">Új Épület</span>
+                <i class="button__icon fas fa-chevron-right"></i>
+              </button>				
+            </div>
+            <div class="social-login" >
+                      <div class="mb-3" *ngFor="let lista of category;let i=index" [ngClass]="i==aktivKategoria?'active':''">
+                          <button (click)="show(i)" (ngModel)="lista.text" type="button" class="button-91">{{lista.text}}</button>
+                      </div>
+                      <div class="mb-3">
+                        <button routerLink="/partners" type="button" class="button-93">Partnerek</button>
+                        </div>
+                        <div class="mb-3">
+                      <button routerLink="/users" type="button" class="button-93">Felhasználók</button>
+                        </div>          
+            </div>
+          </div>
+          <div class="screen__background">
+            <span class="screen__background__shape screen__background__shape4"></span>
+            <span class="screen__background__shape screen__background__shape3"></span>		
+            <span class="screen__background__shape screen__background__shape2"></span>
+            <span class="screen__background__shape screen__background__shape1"></span>
+            <span class="screen__background__shape screen__background__shape1"></span>
+          </div>		
+        </div>
+      </div>
+    
+      <div class="row w-25">
+        <div class="col my-5 fw-bold">
+            Keresés:
+            <input [(ngModel)]="keresendo" type="text"  class="button-94">
+        </div>
+    </div>
+    
+      <div class="containersecond">
+        <div class="screensecond">
+          <div class="screen__contentsecond">
+            <div class="div" >
+              <div class="row">
+                <div class="col fw-bold text-center " (click)="rendez(oszlop)" *ngFor="let oszlop of oszlopok">
+                  {{oszlop.text}}
+                  <ng-container *ngIf="oszlop==rendezOszlop" >
+                    <i *ngIf="rendezIrany==2" class="bi bi-arrow-down"></i>
+                    <i *ngIf="rendezIrany==3" class="bi bi-arrow-up"></i>
+                    
+                </ng-container>
+                </div>
+                <div class="col fw-bold text-center">Műveletek</div>
+              </div>
+            </div>
+            <div class="loginsecond" *ngFor="let epulet of (build|partnerfilter:keresendo)|partnersort:rendezOszlop:rendezIrany "> 
+              <div [ngSwitch]="oszlop.key" *ngFor="let oszlop of oszlopok" class="login__fieldsecond">
+                <input *ngSwitchCase="'dimensionName'" [name]="epulet.dimensionCode" [(ngModel)]="epulet[oszlop.key]" [type]="oszlop.type"  class="login__inputsecond" >
+                 <input *ngSwitchCase="'dimensionCode'" [name]="epulet.dimensionName" [(ngModel)]="epulet[oszlop.key]" [type]="oszlop.type"  class="login__inputsecond" >
+                
+              </div>
+              <button  type="button" class="button-94" (click)="updateBuild(epulet)" >Módosít</button>
+              <button   type="button" class="button-94" (click)="deleteBuild(epulet)" >Töröl</button>			
+            </div>
+          </div>
+          <div class="screen__background">
+            <span class="screen__background__shape screen__background__shape4second"></span>
+            <span class="screen__background__shape screen__background__shape3second"></span>		
+            <span class="screen__background__shape screen__background__shape2second"></span>
+            <span class="screen__background__shape screen__background__shape1second"></span>
+            <span class="screen__background__shape screen__background__shape1second"></span>
+          </div>		
+        </div>
+      </div>
+    
+</ng-container>
+ 
+<ng-container *ngIf="aktivKategoria==2">
+    <div class="container">
+        <div class="screen">
+          <div class="screen__content">
+            <div class="login">
+              <div [ngSwitch]="oszlop.key" *ngFor="let oszlop of oszlopok" class="login__field">
+                <span class="card-title fw-bold" [id]="oszlop.key">{{oszlop.text}}</span>
+    
+                <input *ngSwitchCase="'dimensionName'" name="dimensionName" [(ngModel)]="newarea[oszlop.key]" [type]="oszlop.type"  class="login__input" >
+                 <input *ngSwitchCase="'dimensionCode'" name="dimensionCode" [(ngModel)]="newarea[oszlop.key]" [type]="oszlop.type"  class="login__input" >
+              </div>
+              <button (click)="addArea()" class="button login__submit">
+                <span  class="button__text ">Új Terület</span>
+                <i class="button__icon fas fa-chevron-right"></i>
+              </button>				
+            </div>
+            <div class="social-login" >
+                      <div class="mb-3" *ngFor="let lista of category;let i=index" [ngClass]="i==aktivKategoria?'active':''">
+                          <button (click)="show(i)" (ngModel)="lista.text" type="button" class="button-91">{{lista.text}}</button>
+                      </div>
+                      <div class="mb-3">
+                        <button routerLink="/partners" type="button" class="button-93">Partnerek</button>
+                        </div>
+                        <div class="mb-3">
+                      <button routerLink="/users" type="button" class="button-93">Felhasználók</button>
+                        </div>          
+            </div>
+          </div>
+          <div class="screen__background">
+            <span class="screen__background__shape screen__background__shape4"></span>
+            <span class="screen__background__shape screen__background__shape3"></span>		
+            <span class="screen__background__shape screen__background__shape2"></span>
+            <span class="screen__background__shape screen__background__shape1"></span>
+            <span class="screen__background__shape screen__background__shape1"></span>
+          </div>		
+        </div>
+      </div>
+    
+      <div class="row w-25">
+        <div class="col my-5 fw-bold">
+            Keresés:
+            <input [(ngModel)]="keresendo" type="text"  class="button-94">
+        </div>
+    </div>
+    
+      <div class="containersecond">
+        <div class="screensecond">
+          <div class="screen__contentsecond">
+            <div class="div" >
+              <div class="row">
+                <div class="col fw-bold text-center " (click)="rendez(oszlop)" *ngFor="let oszlop of oszlopok">
+                  {{oszlop.text}}
+                  <ng-container *ngIf="oszlop==rendezOszlop" >
+                    <i *ngIf="rendezIrany==2" class="bi bi-arrow-down"></i>
+                    <i *ngIf="rendezIrany==3" class="bi bi-arrow-up"></i>
+                    
+                </ng-container>
+                </div>
+                <div class="col fw-bold text-center">Műveletek</div>
+              </div>
+            </div>
+            <div class="loginsecond" *ngFor="let terulet of (area|partnerfilter:keresendo)|partnersort:rendezOszlop:rendezIrany "> 
+              <div [ngSwitch]="oszlop.key" *ngFor="let oszlop of oszlopok" class="login__fieldsecond">
+                <input *ngSwitchCase="'dimensionName'" [name]="terulet.dimensionCode" [(ngModel)]="terulet[oszlop.key]" [type]="oszlop.type"  class="login__inputsecond" >
+                 <input *ngSwitchCase="'dimensionCode'" [name]="terulet.dimensionName" [(ngModel)]="terulet[oszlop.key]" [type]="oszlop.type"  class="login__inputsecond" >
+                
+              </div>
+              <button  type="button" class="button-94" (click)="updateArea(terulet)" >Módosít</button>
+              <button   type="button" class="button-94" (click)="deleteArea(terulet)" >Töröl</button>			
+            </div>
+          </div>
+          <div class="screen__background">
+            <span class="screen__background__shape screen__background__shape4second"></span>
+            <span class="screen__background__shape screen__background__shape3second"></span>		
+            <span class="screen__background__shape screen__background__shape2second"></span>
+            <span class="screen__background__shape screen__background__shape1second"></span>
+            <span class="screen__background__shape screen__background__shape1second"></span>
+          </div>		
+        </div>
+      </div>
+    
+</ng-container>
+
+
+<ng-container *ngIf="aktivKategoria==3">
+
+    <div class="container">
+        <div class="screen">
+          <div class="screen__content">
+            <div class="login">
+              <div [ngSwitch]="oszlop.key" *ngFor="let oszlop of oszlopok" class="login__field">
+                <span class="card-title fw-bold" [id]="oszlop.key">{{oszlop.text}}</span>
+    
+                <input *ngSwitchCase="'dimensionName'" name="dimensionName" [(ngModel)]="neworderType[oszlop.key]" [type]="oszlop.type"  class="login__input" >
+                 <input *ngSwitchCase="'dimensionCode'" name="dimensionCode" [(ngModel)]="neworderType[oszlop.key]" [type]="oszlop.type"  class="login__input" >
+              </div>
+              <button (click)="addOrderType()" class="button login__submit">
+                <span  class="button__text ">Új Típus</span>
+                <i class="button__icon fas fa-chevron-right"></i>
+              </button>				
+            </div>
+            <div class="social-login" >
+                      <div class="mb-3" *ngFor="let lista of category;let i=index" [ngClass]="i==aktivKategoria?'active':''">
+                          <button (click)="show(i)" (ngModel)="lista.text" type="button" class="button-91">{{lista.text}}</button>
+                      </div>
+                      <div class="mb-3">
+                        <button routerLink="/partners" type="button" class="button-93">Partnerek</button>
+                        </div>
+                        <div class="mb-3">
+                      <button routerLink="/users" type="button" class="button-93">Felhasználók</button>
+                        </div>          
+            </div>
+          </div>
+          <div class="screen__background">
+            <span class="screen__background__shape screen__background__shape4"></span>
+            <span class="screen__background__shape screen__background__shape3"></span>		
+            <span class="screen__background__shape screen__background__shape2"></span>
+            <span class="screen__background__shape screen__background__shape1"></span>
+            <span class="screen__background__shape screen__background__shape1"></span>
+          </div>		
+        </div>
+      </div>
+    
+      <div class="row w-25">
+        <div class="col my-5 fw-bold">
+            Keresés:
+            <input [(ngModel)]="keresendo" type="text"  class="button-94">
+        </div>
+    </div>
+    
+      <div class="containersecond">
+        <div class="screensecond">
+          <div class="screen__contentsecond">
+            <div class="div" >
+              <div class="row">
+                <div class="col fw-bold text-center " (click)="rendez(oszlop)" *ngFor="let oszlop of oszlopok">
+                  {{oszlop.text}}
+                  <ng-container *ngIf="oszlop==rendezOszlop" >
+                    <i *ngIf="rendezIrany==2" class="bi bi-arrow-down"></i>
+                    <i *ngIf="rendezIrany==3" class="bi bi-arrow-up"></i>
+                    
+                </ng-container>
+                </div>
+                <div class="col fw-bold text-center">Műveletek</div>
+              </div>
+            </div>
+            <div class="loginsecond" *ngFor="let tipus of (orderType|partnerfilter:keresendo)|partnersort:rendezOszlop:rendezIrany "> 
+              <div [ngSwitch]="oszlop.key" *ngFor="let oszlop of oszlopok" class="login__fieldsecond">
+                <input *ngSwitchCase="'dimensionName'" [name]="tipus.dimensionCode" [(ngModel)]="tipus[oszlop.key]" [type]="oszlop.type"  class="login__inputsecond" >
+                 <input *ngSwitchCase="'dimensionCode'" [name]="tipus.dimensionName" [(ngModel)]="tipus[oszlop.key]" [type]="oszlop.type"  class="login__inputsecond" >
+                
+              </div>
+              <button  type="button" class="button-94" (click)="updateOrderType(tipus)" >Módosít</button>
+              <button   type="button" class="button-94" (click)="deleteOrderType(tipus)" >Töröl</button>			
+            </div>
+          </div>
+          <div class="screen__background">
+            <span class="screen__background__shape screen__background__shape4second"></span>
+            <span class="screen__background__shape screen__background__shape3second"></span>		
+            <span class="screen__background__shape screen__background__shape2second"></span>
+            <span class="screen__background__shape screen__background__shape1second"></span>
+            <span class="screen__background__shape screen__background__shape1second"></span>
+          </div>		
+        </div>
+      </div>
+
+
+</ng-container>
+
+<ng-container *ngIf="aktivKategoria==4">
+    <div class="container">
+        <div class="screen">
+          <div class="screen__content">
+            <div class="login">
+              <div [ngSwitch]="oszlop.key" *ngFor="let oszlop of oszlopok" class="login__field">
+                <span class="card-title fw-bold" [id]="oszlop.key">{{oszlop.text}}</span>
+    
+                <input *ngSwitchCase="'dimensionName'" name="dimensionName" [(ngModel)]="newaccountable[oszlop.key]" [type]="oszlop.type"  class="login__input" >
+                 <input *ngSwitchCase="'dimensionCode'" name="dimensionCode" [(ngModel)]="newaccountable[oszlop.key]" [type]="oszlop.type"  class="login__input" >
+              </div>
+              
+              <button (click)="addaccountable()" class="button login__submit">
+                <span  class="button__text ">Új Felhasználó</span>
+                <i class="button__icon fas fa-chevron-right"></i>
+              </button>
+              			
+            </div>
+            <div class="social-login" >
+                      <div class="mb-3" *ngFor="let lista of category;let i=index" [ngClass]="i==aktivKategoria?'active':''">
+                          <button (click)="show(i)" (ngModel)="lista.text" type="button" class="button-91">{{lista.text}}</button>
+                      </div>
+                      <div class="mb-3">
+                        <button routerLink="/partners" type="button" class="button-93">Partnerek</button>
+                        </div>
+                        <div class="mb-3">
+                      <button routerLink="/users" type="button" class="button-93">Felhasználók</button>
+                        </div>          
+            </div>
+          </div>
+          <div class="screen__background">
+            <span class="screen__background__shape screen__background__shape4"></span>
+            <span class="screen__background__shape screen__background__shape3"></span>		
+            <span class="screen__background__shape screen__background__shape2"></span>
+            <span class="screen__background__shape screen__background__shape1"></span>
+            <span class="screen__background__shape screen__background__shape1"></span>
+          </div>		
+        </div>
+      </div>
+        
+
+      <div class="row w-25">
+        <div class="col my-5 fw-bold">
+            Keresés:
+            <input [(ngModel)]="keresendo" type="text"  class="button-94">
+        </div>
+    </div>
+    
+      <div class="containersecond">
+        <div class="screensecond">
+          <div class="screen__contentsecond">
+            <div class="div" >
+              <div class="row">
+                <div class="col fw-bold text-center " (click)="rendez(oszlop)" *ngFor="let oszlop of oszlopok">
+                  {{oszlop.text}}
+                  <ng-container *ngIf="oszlop==rendezOszlop" >
+                    <i *ngIf="rendezIrany==2" class="bi bi-arrow-down"></i>
+                    <i *ngIf="rendezIrany==3" class="bi bi-arrow-up"></i>
+                    
+                </ng-container>
+                </div>
+                <div class="col fw-bold text-center">Műveletek</div>
+              </div>
+            </div>
+            <div class="loginsecond" *ngFor="let felhasznalo of (accountable|partnerfilter:keresendo)|partnersort:rendezOszlop:rendezIrany "> 
+              <div [ngSwitch]="oszlop.key" *ngFor="let oszlop of oszlopok" class="login__fieldsecond">
+                <input *ngSwitchCase="'dimensionName'" [name]="felhasznalo.dimensionCode" [(ngModel)]="felhasznalo[oszlop.key]" [type]="oszlop.type"  class="login__inputsecond" >
+                 <input *ngSwitchCase="'dimensionCode'" [name]="felhasznalo.dimensionName" [(ngModel)]="felhasznalo[oszlop.key]" [type]="oszlop.type"  class="login__inputsecond" >
+                
+              </div>
+              <button  type="button" class="button-94" (click)="updateaccountable(felhasznalo)" >Módosít</button>
+              <button   type="button" class="button-94" (click)="deleteaccountable(felhasznalo)" >Töröl</button>			
+            </div>
+          </div>
+          <div class="screen__background">
+            <span class="screen__background__shape screen__background__shape4second"></span>
+            <span class="screen__background__shape screen__background__shape3second"></span>		
+            <span class="screen__background__shape screen__background__shape2second"></span>
+            <span class="screen__background__shape screen__background__shape1second"></span>
+            <span class="screen__background__shape screen__background__shape1second"></span>
+          </div>		
+        </div>
+      </div>
+</ng-container>

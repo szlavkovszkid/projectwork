@@ -1,0 +1,64 @@
+<!-- <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Thank you for Registering</h5>
+      <p class="card-text">We have snet confirmation email</p>
+      <p class="card-text">Please check your email and click the link to verify your email address</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+
+   <div class="form-floating mb-3">
+        <input  disabled="true" [(ngModel)]="email" type="email" class="form-control" id="floatingEmail" placeholder="Email">
+        <label for="floatingEmail">Email Address</label>
+      </div>
+   
+    
+    <div class="mb-3">
+        <button (click)="SendVerificationEmail()" type="button" class="btn btn-success mb-3">Resend Verification Email</button>
+    </div>
+    </div>
+  </div>
+
+  <div class="form-floating mb-3">
+    <div>
+        Go back to?
+    </div>
+    <button routerLink="/singin" type="button" class="btn btn-success mb-3">Log In</button>
+  </div> -->
+
+
+  <div class="container">
+    <div class="screen">
+      <div class="screen__content">
+        <form class="login">
+          <div class="login__field">
+            <h5 class="card-title">Bejelentkezés után kitölti!</h5>
+            <i class="login__icon fas fa-user"></i>
+            <input name="email" type="email" disabled="true" [(ngModel)]="email" class="login__input" placeholder="E-mail">
+          </div>
+          <button (click)="SendVerificationEmail()" class="button login__submit">
+            <span class="button__text">Megerősítő E-mail küldése</span>
+            <i class="button__icon fas fa-chevron-right"></i>
+          </button>				
+        </form>
+        <div class="social-login">
+          <div class="mb-3">
+                      <button routerLink="/registration" type="button" class="button-92 ">Regisztráció</button>
+                  </div>
+                  <div class="mb-3">
+                      <button routerLink="/login" type="button" class="button-91">Bejelentkezés</button>
+                  </div>
+                  <div class="mb-3">
+                      <button routerLink="/forgottenpassword" type="button" class="button-91">Elfelejtett jelszó</button>
+                  </div>
+        </div>
+      </div>
+      <div class="screen__background">
+        <span class="screen__background__shape screen__background__shape4"></span>
+        <span class="screen__background__shape screen__background__shape3"></span>		
+        <span class="screen__background__shape screen__background__shape2"></span>
+        <span class="screen__background__shape screen__background__shape1"></span>
+              <span class="screen__background__shape screen__background__shape1"></span>
+      </div>		
+    </div>
+  </div>
+  
+  

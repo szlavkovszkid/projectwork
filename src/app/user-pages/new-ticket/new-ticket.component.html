@@ -1,0 +1,170 @@
+<!-- {{ujticket|json}} -->
+<!-- 
+<div class="divflex w-25">
+
+
+    <div [ngSwitch]="oszlop.key" class="input-group mb-3" *ngFor="let oszlop of ticketoszlopok">
+        <span *ngIf="oszlop.key!='status' && oszlop.key!='statusDate'&& oszlop.key!='statusConfiguser'" class="input-group-text" [id]="oszlop.key">{{oszlop.text}}</span>
+        <select *ngSwitchCase="'partner'" [(ngModel)]="ujticket[oszlop.key]" class="form-control" (change)="createAndDate($event)">
+            <option selected></option>
+            <option *ngFor="let partner of partners">
+                {{partner.partner}}
+            </option>
+                
+        </select>
+    <select *ngSwitchCase="'industry'" [(ngModel)]="ujticket[oszlop.key]" class="form-control">
+        <option selected></option>
+        <option *ngFor="let uzletag of industry">
+            {{uzletag.dimensionName}}
+        </option>
+            
+    </select>
+    <select *ngSwitchCase="'build'" [(ngModel)]="ujticket[oszlop.key]" class="form-control">
+        <option selected></option>
+        <option *ngFor="let epulet of build">
+            {{epulet.dimensionName}}
+        </option>
+            
+    </select>
+    <select *ngSwitchCase="'area'" [(ngModel)]="ujticket[oszlop.key]" class="form-control">
+        <option selected></option>
+        <option *ngFor="let terulet of area">
+            {{terulet.dimensionName}}
+        </option>
+            
+    </select>
+    <select *ngSwitchCase="'orderType'" [(ngModel)]="ujticket[oszlop.key]" class="form-control">
+        <option selected></option>
+        <option *ngFor="let tipus of orderType">
+            {{tipus.dimensionName}}
+        </option>       
+    </select>
+    <input *ngSwitchCase="'netto'" [(ngModel)]="ujticket[oszlop.key]" [type]="oszlop.type"  class="form-control" >
+     <input *ngSwitchCase="'brutto'" [(ngModel)]="ujticket[oszlop.key]" [type]="oszlop.type"  class="form-control" >
+    <textarea *ngSwitchCase="'subjectField'" [(ngModel)]="ujticket[oszlop.key]" class="form-control">      
+    </textarea>  
+    <input *ngSwitchCase="'attachment'" [(ngModel)]="ujticket[oszlop.key]" [type]="oszlop.type"  class="form-control" >
+    <input *ngSwitchCase="'createUser'" disabled [value]="useremail[0]" [(ngModel)]="ujticket[oszlop.key]" [type]="oszlop.type">
+    
+    <input *ngSwitchCase="'createDate'" disabled [type]="oszlop.type" [value]="this.now" [(ngModel)]="ujticket[oszlop.key]" -->
+    
+    <!-- <select *ngSwitchCase="'status'" [(ngModel)]="ujticket[oszlop.key]" class="form-control" (change)="seletStatus($event)">
+        <option *ngFor="let allapot of status">
+            {{allapot.text}}
+        </option>       
+    </select>
+    
+    <input *ngSwitchCase="'statusDate'" [type]="oszlop.type" [value]="this.statusdate" disabled [(ngModel)]="ujticket[oszlop.key]">
+    
+    <input *ngSwitchCase="'statusConfiguser'" disabled [value]="userstatusemail[0]" [(ngModel)]="ujticket[oszlop.key]" [type]="oszlop.type">
+     -->
+     
+    <!-- <input *ngSwitchDefault="" [(ngModel)]="ujticket[oszlop.key]" [type]="oszlop.type"  class="form-control" > -->
+   <!--    </div>
+      <button (click)="addticket()">Új Ticket Hozzáadása</button>
+    </div> -->
+   
+
+<!-- <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Thank you for Registering</h5>
+      <p class="card-text">We have snet confirmation email</p>
+      <p class="card-text">Please check your email and click the link to verify your email address</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+
+   <div class="form-floating mb-3">
+        <input  disabled="true" [(ngModel)]="email" type="email" class="form-control" id="floatingEmail" placeholder="Email">
+        <label for="floatingEmail">Email Address</label>
+      </div>
+   
+    
+    <div class="mb-3">
+        <button (click)="SendVerificationEmail()" type="button" class="btn btn-success mb-3">Resend Verification Email</button>
+    </div>
+    </div>
+  </div>
+
+  <div class="form-floating mb-3">
+    <div>
+        Go back to?
+    </div>
+    <button routerLink="/singin" type="button" class="btn btn-success mb-3">Log In</button>
+  </div> -->
+
+
+  <div class="container">
+    <div class="screen">
+      <div class="screen__content">
+        <form class="login">
+          <div [ngSwitch]="oszlop.key" *ngFor="let oszlop of ticketoszlopok" class="login__field">
+            <span *ngIf="oszlop.key!='status' && oszlop.key!='statusDate'&& oszlop.key!='statusConfiguser'" class="card-title fw-bold" [id]="oszlop.key">{{oszlop.text}}</span>
+            <select *ngSwitchCase="'partner'" name="partner" [(ngModel)]="ujticket[oszlop.key]"  class="login__input" (change)="createAndDate($event)">
+                <option selected></option>
+                <option *ngFor="let partner of partners">
+                    {{partner.partner}}
+                </option>
+            </select>
+            <select *ngSwitchCase="'industry'" name="industry" [(ngModel)]="ujticket[oszlop.key]"  class="login__input">
+                <option selected></option>
+                <option *ngFor="let uzletag of industry">
+                    {{uzletag.dimensionName}}
+                </option>
+                    
+            </select>
+            <select *ngSwitchCase="'build'" name="build" [(ngModel)]="ujticket[oszlop.key]" class="login__input">
+                <option selected></option>
+                <option *ngFor="let epulet of build" [value]="epulet.dimensionName">
+                    {{epulet.dimensionName}}
+                </option>
+                    
+            </select>
+            <select *ngSwitchCase="'area'" name="area" [(ngModel)]="ujticket[oszlop.key]" class="login__input">
+                <option selected></option>
+                <option *ngFor="let terulet of area">
+                    {{terulet.dimensionName}}
+                </option>
+                    
+            </select>
+            <select *ngSwitchCase="'orderType'" name="orderType" [(ngModel)]="ujticket[oszlop.key]" class="login__input">
+                <option selected></option>
+                <option *ngFor="let tipus of orderType">
+                    {{tipus.dimensionName}}
+                </option>       
+            </select>
+            <input *ngSwitchCase="'netto'" name="netto" [(ngModel)]="ujticket[oszlop.key]" [type]="oszlop.type"  class="login__input" >
+             <input *ngSwitchCase="'brutto'" name="brutto" [(ngModel)]="ujticket[oszlop.key]" [type]="oszlop.type"  class="login__input" >
+            <textarea *ngSwitchCase="'subjectField'" name="subjectField" [(ngModel)]="ujticket[oszlop.key]" class="login__input">      
+            </textarea>  
+            <input *ngSwitchCase="'attachment'" name="attachment" [(ngModel)]="ujticket[oszlop.key]" [type]="oszlop.type"  class="login__input" >
+            <input *ngSwitchCase="'createUser'" name="createUser" disabled [value]="useremail[0]" [(ngModel)]="ujticket[oszlop.key]" [type]="oszlop.type" class="login__input">
+            
+            <input *ngSwitchCase="'createDate'" name="createDate" disabled [type]="oszlop.type" [value]="this.now" [(ngModel)]="ujticket[oszlop.key]" class="login__input">
+
+          </div>
+          <button (click)="addticket()" class="button login__submit">
+            <span  class="button__text ">Új ticket hozzáadása</span>
+            <i class="button__icon fas fa-chevron-right"></i>
+          </button>				
+        </form>
+        <div class="social-login">
+                  <div class="mb-3">
+                      <button routerLink="/tickets" type="button" class="button-93">Ticketek</button>
+                  </div>
+                  <div class="mb-3">
+                    <button routerLink="/statements" type="button" class="button-92">Kimutatások</button>
+                </div>
+                <div class="mb-3">
+                    <button routerLink="/instructions" type="button" class="button-91">Instrukciók</button>
+                </div>
+                  
+        </div>
+      </div>
+      <div class="screen__background">
+        <span class="screen__background__shape screen__background__shape4"></span>
+        <span class="screen__background__shape screen__background__shape3"></span>		
+        <span class="screen__background__shape screen__background__shape2"></span>
+        <span class="screen__background__shape screen__background__shape1"></span>
+              <span class="screen__background__shape screen__background__shape1"></span>
+      </div>		
+    </div>
+  </div>
